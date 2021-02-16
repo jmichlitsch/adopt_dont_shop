@@ -1,5 +1,4 @@
 <h1>Application Info</h1>
-
 <section>
   <p><b>Name: </b><%= @app.name %></p>
   <p><b>Street Address: </b><%= @app.address %></p>
@@ -10,3 +9,18 @@
   <p><b>Application Status: </b><%= @app.status %></p>
   <p><b>Pets Applied For: </b><%= link_to "#{@app.pet_name}", "/user_applications/#{@app.id}/pets"%></p>
 </section>
+
+<h2>Select pets</h2>
+<section class="pet_search">
+  <%= form_with url: "/user_applications/#{@app.id}", method: :get, local: true do |f| %>
+  <%= f.label :pet_search %><br>
+  <%= f.text_field :pet_search %><br>
+  <%= f.submit 'Search For Pet By Name'%>
+  <% end %>
+</section>
+
+<% if params[:pet_search] %>
+  <% @pets.each do |pet| %>
+    <%= link_to "#{pet.name} - Adopt this Pet", user_application_pets_path(user_application_id: @app.id, pet_id: pet.id), method: :post %><br>
+  <% end %>
+<% end %> 
