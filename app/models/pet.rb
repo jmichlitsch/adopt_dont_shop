@@ -8,4 +8,8 @@ class Pet < ApplicationRecord
             }
 
   enum sex: [:female, :male]
+
+  def self.search_pet(animal_name)
+    where("lower(name) like ?", "%#{animal_name.downcase}%")
+  end
 end
