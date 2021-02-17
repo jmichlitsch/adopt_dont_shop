@@ -1,12 +1,47 @@
-<h2>Application Info</h2>
-  <p><b>Name: </b><%= @app.name %></p><br>
-  <p><b>Street Address: </b><%= @app.address %></p><br>
-  <p><b>City: </b><%= @app.city %></p><br>
-  <p><b>State: </b><%= @app.state %></p><br>
-  <p><b>Zip Code: </b><%= @app.zip %></p><br>
-  <p><b>Application Status: </b><%= @app.status %></p><br>
-  <p><b>Description: </b><%= @app.description %></p><br>
-  <p><b>Pets Applied For: %></b></p><br>
-  <% @app.pets.each do |pet| %>
+<h2><%= @app.name %></h2>
+<%= form_tag applications_show_path, method: :get do %>
+  <%= label_tag :search, 'Add a Pet to this Application' %>
+  <%= text_field_tag :search, params[:search] %><br>
+  <%= submit_tag 'Search' %><br>
 
+  <% if @selected  %>
+    <% @selected.each do |selected| %>
+    <%=  selected.name %> <%= link_to 'Adopt this Pet', user_applications_show_path(@app.id, :pet_id => selected.id, :adopt => true), method: :get %> <br>
+  <% end %>
+    <%  @app.pets.each do |pet|%>
+    <%=  pet.name%>
+      <% end %>
+  <% end %>
+<% end %>
+
+<%= "Address:  #{@app.street_address}" %><br>
+<%= "City: #{@app.city}" %><br>
+<%= "State: #{@app.state}" %><br>
+<%= "Zipcode: #{@app.zip}" %><br>
+<%= "Why I am a good fit:  #{@app.description}" %><br>
+<%  @app.pet_applications.each do |app| %>
+<%         pet = app.pet %>
+<%= link_to "#{pet.name}", pets_show_path%><br>
+
+<% if app.approved == nil %>
+<%=  button_to 'Approve Adoption', pet_application_path(user_application_id: @app.id, pet_id: pet.id, approved: true), method: :patch %>
+<%= button_to 'Reject Adoption', pet_application_path(user_application_id: @app.id, pet_id: pet.id, approved: false), method: :patch %>
+<% end %>
+<% if app.approved  == true %>
+<%=  "Approved!"%><br>
+<% end %>
+<% if app.approved  == false %>
+<%=  "We are sorry to inform you your adoption has been rejected."%><br>
+<% end %>
+<% end %>
+
+
+<%= "Application status  #{@app.status}" %><br>
+
+<% if @app.pets.count >= 1 %>
+<%= form_tag user_applications_show_path, method: :get do %>
+  <%= label_tag :description, 'Why you are a good fit' %>
+  <%= text_field_tag :description %><br>
+  <%= submit_tag 'Submit' %>
+  <% end %>
 <% end %>

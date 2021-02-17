@@ -4,7 +4,7 @@ FactoryBot.define do
     address {Faker::Address.street_address}
     city {Faker::Address.city}
     state {Faker::Address.state_abbr}
-    zip {Faker::Address.zip_code}
+    zip {80234}
     description {Faker::Artist.name}
   end
 end

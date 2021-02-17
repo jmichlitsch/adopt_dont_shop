@@ -2,14 +2,15 @@
   <h2>New Application</h2>
   <%= label_tag :name %>
   <%= text_field_tag :name %><br>
-  <%= label_tag :street_address %>
-  <%= text_field_tag :street_address %><br>
+  <%= label_tag :address %>
+  <%= text_field_tag :address %><br>
   <%= label_tag :city %>
   <%= text_field_tag :city%><br>
   <%= label_tag :state %>
   <%= text_field_tag :state %><br>
   <%= label_tag :zip %>
   <%= text_field_tag :zip%><br>
-
+  <%= label_tag 'Describe_why_you_would_be_a_good_owner_in_255_words_or_less' %><br>
+  <%= text_field_tag :description%><br>
   <%= submit_tag 'Submit' %>
 <% end %>

@@ -26,7 +26,6 @@ class UserApplicationsController < ApplicationController
 
   private
   def app_params
-    binding.pry
     params.permit(:name, :address, :city, :state, :zip, :description, :status)
   end
 end
