@@ -1,0 +1,12 @@
+<h2>Application Info</h2>
+  <p><b>Name: </b><%= @app.name %></p><br>
+  <p><b>Street Address: </b><%= @app.address %></p><br>
+  <p><b>City: </b><%= @app.city %></p><br>
+  <p><b>State: </b><%= @app.state %></p><br>
+  <p><b>Zip Code: </b><%= @app.zip %></p><br>
+  <p><b>Application Status: </b><%= @app.status %></p><br>
+  <p><b>Description: </b><%= @app.description %></p><br>
+  <p><b>Pets Applied For: %></b></p><br>
+  <% @app.pets.each do |pet| %>
+
+<% end %>

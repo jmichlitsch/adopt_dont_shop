@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_231930) do
+ActiveRecord::Schema.define(version: 2021_02_17_004832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_231930) do
     t.string "state"
     t.string "zip"
     t.string "description"
-    t.string "status", default: "In Progress"
+    t.integer "status", default: 0
   end
 
   add_foreign_key "pet_applications", "pets"
