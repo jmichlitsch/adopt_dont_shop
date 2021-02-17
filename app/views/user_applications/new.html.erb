@@ -1,16 +1,15 @@
-<%= form_with model: @user_application do |f| %>
-  <%= f.label :name, 'Name:' %><br>
-  <%= f.text_field :name, required: :true %><br>
+<%= form_tag "/user_applications" do %>
+  <h2>New Application</h2>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %><br>
+  <%= label_tag :street_address %>
+  <%= text_field_tag :street_address %><br>
+  <%= label_tag :city %>
+  <%= text_field_tag :city%><br>
+  <%= label_tag :state %>
+  <%= text_field_tag :state %><br>
+  <%= label_tag :zip %>
+  <%= text_field_tag :zip%><br>
 
-  <%= f.label :address, 'Street Address:' %><br>
-  <%= f.text_field :address, required: :true %><br>
-  <%= f.label :city, 'City:' %><br>
-  <%= f.text_field :city, required: :true %><br>
-  <%= f.label :state, 'State:' %><br>
-  <%= f.text_field :state, required: :true %><br>
-  <%= f.label :zip, 'Zip Code:' %><br>
-  <%= f.text_field :zip, required: :true %><br>
-  <%= f.label :describe_why_you_would_be_a_good_owner_in_255_words_or_less %><br>
-  <%= f.text_field :description, required: :true %><br>
-  <%= f.submit 'Submit Application' %>
+  <%= submit_tag 'Submit' %>
 <% end %>

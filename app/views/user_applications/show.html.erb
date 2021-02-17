@@ -1,26 +1,34 @@
-<h1>Application Info</h1>
-<section>
-  <p><b>Name: </b><%= @app.name %></p>
-  <p><b>Street Address: </b><%= @app.address %></p>
-  <p><b>State: </b><%= @app.state %></p>
-  <p><b>City: </b><%= @app.city %></p>
-  <p><b>Zip: </b><%= @app.zip %></p>
-  <p><b>Description: </b><%= @app.description %></p>
-  <p><b>Application Status: </b><%= @app.status %></p>
-  <p><b>Pets Applied For: </b><%= link_to "#{@app.pet_name}", "/user_applications/#{@app.id}/pets"%></p>
-</section>
+<h2><%= @app.name %></h2>
+<%= form_tag user_applications_show_path, method: :get do %>
+  <%= label_tag :search, 'Add a Pet to this Application' %>
+  <%= text_field_tag :search, params[:search] %><br>
+  <%= submit_tag 'Search' %><br>
 
-<h2>Select pets</h2>
-<section class="pet_search">
-  <%= form_with url: "/user_applications/#{@app.id}", method: :get, local: true do |f| %>
-  <%= f.label :pet_search %><br>
-  <%= f.text_field :pet_search %><br>
-  <%= f.submit 'Search For Pet By Name'%>
+  <% if @selected  %>
+    <% @selected.each do |selected| %>
+    <%=  selected.name %> <%= link_to 'Adopt this Pet', applications_show_path(@app.id, :pet_id => selected.id, :adopt => true), method: :get %> <br>
   <% end %>
-</section>
+    <%  @app.pets.each do |pet|%>
+    <%=  pet.name%>
+      <% end %>
+  <% end %>
+<% end %>
 
-<% if params[:pet_search] %>
-  <% @pets.each do |pet| %>
-    <%= link_to "#{pet.name} - Adopt this Pet", user_application_pets_path(user_application_id: @app.id, pet_id: pet.id), method: :post %><br>
+
+<%= "Address:  #{@app.street_address}" %><br>
+<%= "City: #{@app.city}" %><br>
+<%= "State: #{@app.state}" %><br>
+<%= "Zipcode: #{@app.zip}" %><br>
+<%= "Why I am a good fit:  #{@app.description}" %><br>
+<%  @app.pets.each do |pet| %>
+<%= link_to "#{pet.name}", pets_show_path%><br>
+<% end %>
+<%= "Application status  #{@app.status}" %><br>
+
+<% if @app.pets.count >= 1 %>
+<%= form_tag applications_show_path, method: :get do %>
+  <%= label_tag :description, 'Why you are a good fit' %>
+  <%= text_field_tag :description %><br>
+  <%= submit_tag 'Submit' %>
   <% end %>
-<% end %> 
+<% end %>

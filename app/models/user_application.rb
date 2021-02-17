@@ -5,7 +5,6 @@ class UserApplication < ApplicationRecord
     validates :state, length: {maximum: 2}, presence: true
     validates :zip, numericality: true, presence: true
 
-
   def pet_name
     pets.pluck(:name)
   end

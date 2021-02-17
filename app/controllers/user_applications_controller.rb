@@ -1,13 +1,13 @@
 class UserApplicationsController < ApplicationController
   def show
     @app = UserApplication.find(params[:id])
-    if params[:pet_search]
-      @pets = Pet.all.search_pet(params[:pet_search])
-    end
+    @pets = Pet.all.search_pet(params[:pet_search]) if params[:pet_search]
   end
-  def new
 
+  def new
+    @user_application = UserApplication.new
   end
+
   def create
     app = UserApplication.new(app_params)
     if app.save
@@ -26,6 +26,7 @@ class UserApplicationsController < ApplicationController
 
   private
   def app_params
+    binding.pry
     params.permit(:name, :address, :city, :state, :zip, :description, :status)
-end
+  end
 end
