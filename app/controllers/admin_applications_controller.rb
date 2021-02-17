@@ -1,40 +1,39 @@
-class AdminUserApplicationsController < UserApplicationController
-  class Admin::UserApplicationsController < ApplicationController
+class Admin::UserApplicationsController < ApplicationController
 
-    def index
-      @apps = UserApplication.all
+  def index
+    @applications = UserApplication.all
+  end
+
+  def show
+    @application = UserApplication.find(params[:id])
+    if params[:search]
+      @selected = Pet.search(params[:search])
     end
-
-    def show
-      @app = UserApplication.find(params[:id])
-      if params[:search]
-        @selected = Pet.search(params[:search])
-      end
-      if params[:adopt]
-        chosen = Pet.find(params[:pet_id])
-        @pet_app = PetApplication.create!(pet_id: chosen.id, app_id: @app.id)
-      end
-      if params[:description] != nil
-        @app.update(status: "Pending")
-      end
+    if params[:adopt]
+      chosen = Pet.find(params[:pet_id])
+      @pet_app = PetApplication.create!(pet_id: chosen.id, application_id: @application.id)
     end
-
-
-    def new
-    end
-
-    def create
-      app = UserApplication.new(app_params)
-      if app.save
-        redirect_to user_apps_show_path(app.id)
-      else
-        flash.now[:notice] = "UserApplication not created: Required information missing."
-        render :new
-      end
-    end
-
-    private
-    def app_params
-      params.permit(:name, :street_address, :city, :state, :zip, :description, :status)
+    if params[:description] != nil
+      @application.update(status: "Pending")
     end
   end
+
+
+  def new
+  end
+
+  def create
+    application = UserApplication.new(application_params)
+    if application.save
+      redirect_to applications_show_path(application.id)
+    else
+      flash.now[:notice] = "Application not created: Required information missing."
+      render :new
+    end
+  end
+
+  private
+  def application_params
+    params.permit(:name, :address, :city, :state, :zip, :description, :status)
+  end
+end

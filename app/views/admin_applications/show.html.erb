@@ -1,31 +1,31 @@
-<h2><%= @app.name %></h2>
-<%= form_tag applications_show_path, method: :get do %>
+<h2><%= @application.name %></h2>
+<%= form_tag user_applications_show_path, method: :get do %>
   <%= label_tag :search, 'Add a Pet to this Application' %>
   <%= text_field_tag :search, params[:search] %><br>
   <%= submit_tag 'Search' %><br>
 
   <% if @selected  %>
     <% @selected.each do |selected| %>
-    <%=  selected.name %> <%= link_to 'Adopt this Pet', user_applications_show_path(@app.id, :pet_id => selected.id, :adopt => true), method: :get %> <br>
+    <%=  selected.name %> <%= link_to 'Adopt this Pet', user_applications_show_path(@application.id, :pet_id => selected.id, :adopt => true), method: :get %> <br>
   <% end %>
-    <%  @app.pets.each do |pet|%>
+    <%  @application.pets.each do |pet|%>
     <%=  pet.name%>
       <% end %>
   <% end %>
 <% end %>
 
-<%= "Address:  #{@app.street_address}" %><br>
-<%= "City: #{@app.city}" %><br>
-<%= "State: #{@app.state}" %><br>
-<%= "Zipcode: #{@app.zip}" %><br>
-<%= "Why I am a good fit:  #{@app.description}" %><br>
-<%  @app.pet_applications.each do |app| %>
+<%= "Address:  #{@application.address}" %><br>
+<%= "City: #{@application.city}" %><br>
+<%= "State: #{@application.state}" %><br>
+<%= "Zipcode: #{@application.zip}" %><br>
+<%= "Why I am a good fit:  #{@application.description}" %><br>
+<%  @application.pet_applications.each do |app| %>
 <%         pet = app.pet %>
 <%= link_to "#{pet.name}", pets_show_path%><br>
 
 <% if app.approved == nil %>
-<%=  button_to 'Approve Adoption', pet_application_path(user_application_id: @app.id, pet_id: pet.id, approved: true), method: :patch %>
-<%= button_to 'Reject Adoption', pet_application_path(user_application_id: @app.id, pet_id: pet.id, approved: false), method: :patch %>
+<%=  button_to 'Approve Adoption', pet_application_path(application_id: @application.id, pet_id: pet.id, approved: true), method: :patch %>
+<%= button_to 'Reject Adoption', pet_application_path(application_id: @application.id, pet_id: pet.id, approved: false), method: :patch %>
 <% end %>
 <% if app.approved  == true %>
 <%=  "Approved!"%><br>
@@ -36,9 +36,9 @@
 <% end %>
 
 
-<%= "Application status  #{@app.status}" %><br>
+<%= "Application status  #{@application.status}" %><br>
 
-<% if @app.pets.count >= 1 %>
+<% if @application.pets.count >= 1 %>
 <%= form_tag user_applications_show_path, method: :get do %>
   <%= label_tag :description, 'Why you are a good fit' %>
   <%= text_field_tag :description %><br>

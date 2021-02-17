@@ -1,31 +1,37 @@
 class UserApplicationsController < ApplicationController
-  def show
-    @app = UserApplication.find(params[:id])
-    @pets = Pet.all.search_pet(params[:pet_search]) if params[:pet_search]
-  end
+  def index
+   @applications = UserApplication.all
+ end
 
-  def new
-    @user_application = UserApplication.new
-  end
+ def show
+   @application = UserApplication.find(params[:id])
+   if params[:search]
+     @selected = Pet.search(params[:search])
+   end
+   if params[:adopt]
+     chosen = Pet.find(params[:pet_id])
+     pet_app = PetApplication.create!(pet_id: chosen.id, application_id: @application.id)
+   end
+   if params[:description] != nil
+     @application.update(status: "Pending")
+   end
+ end
 
-  def create
-    app = UserApplication.new(app_params)
-    if app.save
-      redirect_to user_application_path(app.id)
-    else
-      flash[:error] = "Please Fill in all Required Fields"
-      render :new
-    end
-  end
+ def new
+ end
 
-  def update
-    app = UserApplication.find(params[:id])
-    app.update(status: "Pending")
-    redirect_to user_application_path(app.id)
-  end
+ def create
+   application = UserApplication.new(application_params)
+   if application.save
+     redirect_to user_applications_show_path(application.id)
+   else
+     flash.now[:notice] = "Application not created: Required information missing."
+     render :new
+   end
+ end
 
-  private
-  def app_params
-    params.permit(:name, :address, :city, :state, :zip, :description, :status)
-  end
+ private
+ def application_params
+   params.permit(:name, :street_address, :city, :state, :zip, :description, :status)
+ end
 end
