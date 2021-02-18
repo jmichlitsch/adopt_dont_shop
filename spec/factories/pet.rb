@@ -1,3 +1,4 @@
+
 FactoryBot.define do
   factory :pet do
     image {Faker::Avatar.image}

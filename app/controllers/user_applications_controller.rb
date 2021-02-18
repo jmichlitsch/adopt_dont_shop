@@ -21,7 +21,7 @@ class UserApplicationsController < ApplicationController
  end
 
  def create
-   application = UserApplication.new(application_params)
+   application = UserApplication.new(user_application_params)
    if application.save
      redirect_to user_applications_show_path(application.id)
    else
@@ -31,7 +31,7 @@ class UserApplicationsController < ApplicationController
  end
 
  private
- def application_params
+ def user_application_params
    params.permit(:name, :address, :city, :state, :zip, :description, :status)
  end
 end

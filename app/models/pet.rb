@@ -20,7 +20,6 @@ class Pet < ApplicationRecord
   end
 
   def self.action_required
-    # pending_apps.where("adoptions.status='null'")
     self.joins("INNER JOIN adoptions ON pet_applications.pet_id = pets.id AND pet_applications.status = NULL")
   end
 

@@ -11,7 +11,7 @@ class Admin::UserApplicationsController < ApplicationController
     end
     if params[:adopt]
       chosen = Pet.find(params[:pet_id])
-      @pet_app = PetApplication.create!(pet_id: chosen.id, application_id: @application.id)
+      @pet_app = PetApplication.create!(pet_id: chosen.id, user_application_id: @application.id)
     end
     if params[:description] != nil
       @application.update(status: "Pending")

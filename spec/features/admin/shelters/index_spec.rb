@@ -37,9 +37,9 @@ RSpec.describe "Admin Shelters Index" do
             adoptable: true,
             sex: 0)
 
-        @adam = UserApplication.create!(name: "Adam Cohen", address: "1c Lola Road", city: "Miami", state: "FL", zip: 33434,description: "I like turtles")
-        @georgia = UserApplication.create!(name: "Georgia Arthur", address: "10 Pelican Drive", city: "Philadelphia", state: "PA", zip: 22243, description: "I don't like turtles")
-        @linzi = UserApplication.create!(name: "Linzi Hurwitz", address: "333 N Federal Hwy", city: "Boca Raton", state: "FL", zip: 33432, description: "I don't like my furniture")
+        @adam = UserApplication.create!(name: "Adam", address: "1c Lola Road", city: "Miami", state: "FL", zip: 33434,description: "I like turtles")
+        @georgia = UserApplication.create!(name: "Georgia", address: "10 Pelican Drive", city: "Philadelphia", state: "PA", zip: 22243, description: "I don't like turtles")
+        @linzi = UserApplication.create!(name: "Linzi", address: "333 N Federal Hwy", city: "Boca Raton", state: "FL", zip: 33432, description: "I don't like my furniture")
 
 
         PetApplication.create!(pet: @chester, user_application: @adam)
