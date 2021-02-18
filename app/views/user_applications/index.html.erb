@@ -1,0 +1,4 @@
+<h1>User_Applications</h1>
+<% @applications.each do |application| %> <br>
+<%= link_to "#{application.name}", user_applications_show_path(application.id) %>
+<% end  %>

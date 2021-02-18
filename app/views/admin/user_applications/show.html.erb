@@ -24,8 +24,8 @@
 <%= link_to "#{pet.name}", pets_show_path%><br>
 
 <% if app.approved == nil %>
-<%=  button_to 'Approve Adoption', pet_application_path(application_id: @application.id, pet_id: pet.id, approved: true), method: :patch %>
-<%= button_to 'Reject Adoption', pet_application_path(application_id: @application.id, pet_id: pet.id, approved: false), method: :patch %>
+<%=  button_to 'Approve Adoption', pet_application_path(user_application_id: @application.id, pet_id: pet.id, approved: true), method: :patch %>
+<%= button_to 'Reject Adoption', pet_application_path(user_application_id: @application.id, pet_id: pet.id, approved: false), method: :patch %>
 <% end %>
 <% if app.approved  == true %>
 <%=  "Approved!"%><br>
