@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   #Admin
   namespace :admin do
-    resources :applications, only: [:show, :update]
+    resources :user_applications, only: [:show, :update]
   end
 
   #PetApplications
