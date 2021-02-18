@@ -38,8 +38,5 @@ describe Pet, type: :model do
       expect(Pet.adopted_count).to eq(0)
       expect(Pet.avg_age.round(1)).to eq(3)
     end
-
-    it "can search, can provide pending_apps, and provide action_required" do
-    end
   end
 end
