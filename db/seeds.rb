@@ -1,4 +1,7 @@
-require 'factory_bot_rails'
+require 'factory_bot'
+require 'spec/facorties/pet'
+require 'spec/facorties/shelter'
+require 'spec/facorties/pet'
 require 'faker'
 UserApplication.destroy_all
 Pet.destroy_all
