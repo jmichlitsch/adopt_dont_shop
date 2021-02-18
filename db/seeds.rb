@@ -1,4 +1,4 @@
-require 'factory_bot'
+require 'factory_bot_rails'
 require 'faker'
 UserApplication.destroy_all
 Pet.destroy_all
