@@ -22,15 +22,7 @@ class Admin::UserApplicationsController < ApplicationController
   def new
   end
 
-  def create
-    application = UserApplication.new(application_params)
-    if application.save
-      redirect_to user_applications_show_path(application.id)
-    else
-      flash.now[:notice] = "Application not created: Required information missing."
-      render :new
-    end
-  end
+
 
   private
   def application_params
