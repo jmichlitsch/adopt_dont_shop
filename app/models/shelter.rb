@@ -17,4 +17,7 @@ class Shelter < ApplicationRecord
   def pending_apps?
     !pets.pending_apps.empty?
   end
+  def action_required
+    pets.joins(:pet_applications).where('pet_applications.user_application_id IS NOT NULL').first
+  end
 end

@@ -20,7 +20,9 @@ class Pet < ApplicationRecord
   end
 
   def self.action_required
-    self.joins("INNER JOIN adoptions ON pet_applications.pet_id = pets.id AND pet_applications.status = NULL")
+    self.joins("LEFT JOIN pet_applications ON pet_applications.pet_id = pets.id").each do |pet|
+      pet.name
+    end
   end
 
   def self.avg_age
